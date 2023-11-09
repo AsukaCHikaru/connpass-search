@@ -1,18 +1,10 @@
 import { component$ } from "@builder.io/qwik";
 import { routeLoader$ } from "@builder.io/qwik-city";
-
-const CONNPASS_API_ENDPOINT = "https://connpass.com/api/v1/event/";
-
-export const fetchEvents = async () => {
-  const response: Response = await fetch(CONNPASS_API_ENDPOINT, {
-    headers: { Accept: "application/json" },
-  });
-  const data = await response.json();
-  return data;
-};
+import { fetchEvents } from "~/services/eventService";
+import type { ConnpassEventResponse } from "~/types/connpass";
 
 export const useEvents = routeLoader$(async () => {
-  const data = await fetchEvents();
+  const data = (await fetchEvents()) as ConnpassEventResponse;
   return data;
 });
 
