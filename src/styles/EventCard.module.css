@@ -1,0 +1,16 @@
+.card {
+  border: solid 1px #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+
+  > h5 {
+    font-size: 1.5rem;
+    line-height: 1;
+    margin: 1rem 0;
+  }
+
+  > h6 {
+    margin: 1rem 0;
+    font-size: 1rem;
+  }
+}
