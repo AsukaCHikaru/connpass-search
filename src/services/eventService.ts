@@ -1,4 +1,4 @@
-import type { ConnpassEventRequestQuery } from "~/types/connpass";
+import type { ConnpassEventRequestQuery, ConnpassEventResponse } from "~/types/connpass";
 
 const CONNPASS_API_ENDPOINT = "https://connpass.com/api/v1/event/";
 
@@ -20,5 +20,5 @@ export const fetchEvents = async (query?: ConnpassEventRequestQuery) => {
     headers: { Accept: "application/json" },
   });
   const data = await response.json();
-  return data;
+  return data as ConnpassEventResponse;
 };
