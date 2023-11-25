@@ -1,11 +1,11 @@
 import { $, component$, useSignal, useStore } from "@builder.io/qwik";
 import { routeLoader$ } from "@builder.io/qwik-city";
-import EventCard from "~/components/search/EventCard";
-import KeywordSelector from "~/components/search/KeywordSelector";
 import { fetchEvents } from "~/services/eventService";
 import type { ConnpassEvent, ConnpassEventResponse } from "~/types/connpass";
-import styles from "../../styles/index.module.css";
 import EventModal from "~/components/search/EventModal";
+import EventList from "~/components/search/EventList";
+import Layout from "~/components/search/Layout";
+import SearchPreference from "~/components/search/SearchPreference";
 
 export const useEvents = routeLoader$(async (requestEvent) => {
   const keyword = requestEvent.query.get("keyword") || "";
@@ -38,20 +38,13 @@ export default component$(() => {
           onClose={handleModalClose}
         />
       )}
-      <div>
-        <div style={{ display: "flex" }}>
-          <KeywordSelector keywords={["javascript", "python", "php", "AI"]} />
-        </div>
-        <div class={styles["card-list"]}>
-          {events.value.events.map((event) => (
-            <EventCard
-              key={event.event_id}
-              event={event}
-              onClick={handleCardClick}
-            />
-          ))}
-        </div>
-      </div>
+      <Layout>
+        <SearchPreference />
+        <EventList
+          eventList={events.value.events}
+          onCardClick={handleCardClick}
+        />
+      </Layout>
     </>
   );
 });
