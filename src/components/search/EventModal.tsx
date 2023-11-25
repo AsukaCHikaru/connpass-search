@@ -1,6 +1,6 @@
 import { type Signal, component$ } from "@builder.io/qwik";
 import type { ConnpassEvent } from "~/types/connpass";
-import styles from "../../styles/EventModal.module.css";
+import styles from "./EventModal.module.css";
 
 interface Props {
   ref: Signal<HTMLDialogElement | undefined>;

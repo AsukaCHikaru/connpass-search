@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import { type ConnpassEvent } from "~/types/connpass";
-import styles from "../../styles/index.module.css";
+import styles from "./EventList.module.css";
 import EventCard from "./EventCard";
 
 interface Props {
