@@ -1,0 +1,13 @@
+.modal {
+  background-color: navy;
+  position: relative;
+  max-width: 80vw;
+  max-height: 80vh;
+  padding: 0;
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
