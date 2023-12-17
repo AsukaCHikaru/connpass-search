@@ -7,9 +7,9 @@ interface Props {
   onClick: (event: ConnpassEvent) => void;
 }
 
-export default component$<Props>(({ event }) => {
+export default component$<Props>(({ event, onClick }) => {
   return (
-    <div class={styles.card}>
+    <div class={styles.card} onClick$={() => onClick(event)}>
       <h5>{event.title}</h5>
       {event.catch && <h6>{event.catch}</h6>}
       <p>
