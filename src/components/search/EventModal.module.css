@@ -4,6 +4,10 @@
   max-width: 80vw;
   max-height: 80vh;
   padding: 0;
+  position: fixed;
+  top: 10vh;
+  left: 10vw;
+  overflow-y: scroll;
 }
 
 .close-button {

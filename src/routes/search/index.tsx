@@ -1,11 +1,16 @@
-import { $, component$, useSignal, useStore } from "@builder.io/qwik";
+import {
+  $,
+  component$,
+  useContextProvider,
+  useSignal,
+} from "@builder.io/qwik";
 import { routeLoader$ } from "@builder.io/qwik-city";
 import { fetchEvents } from "~/services/eventService";
 import type { ConnpassEvent, ConnpassEventResponse } from "~/types/connpass";
-import EventModal from "~/components/search/EventModal";
 import EventList from "~/components/search/EventList";
 import Layout from "~/components/search/Layout";
 import SearchPreference from "~/components/search/SearchPreference";
+import { PortalContext } from "~/components/search/Portal";
 
 export const useEvents = routeLoader$(async (requestEvent) => {
   const keyword = requestEvent.query.get("keyword") || "";
@@ -15,36 +20,26 @@ export const useEvents = routeLoader$(async (requestEvent) => {
 
 export default component$(() => {
   const events = useEvents();
-  const selectedEvent = useStore<{ event: ConnpassEvent | null }>({
-    event: null,
+  const selectedEvent = useSignal<ConnpassEvent | null>(null);
+  const handleModalClose = $(() => {
+    selectedEvent.value = null;
   });
-  const modalRef = useSignal<HTMLDialogElement>();
+  useContextProvider(PortalContext, {
+    onClose: handleModalClose,
+    event: selectedEvent,
+  });
 
   const handleCardClick = $((event: ConnpassEvent) => {
-    selectedEvent.event = event;
-    modalRef.value?.showModal();
-  });
-
-  const handleModalClose = $(() => {
-    modalRef.value?.close();
+    selectedEvent.value = event;
   });
 
   return (
-    <>
-      {selectedEvent.event && (
-        <EventModal
-          event={selectedEvent.event}
-          ref={modalRef}
-          onClose={handleModalClose}
-        />
-      )}
-      <Layout>
-        <SearchPreference />
-        <EventList
-          eventList={events.value.events}
-          onCardClick={handleCardClick}
-        />
-      </Layout>
-    </>
+    <Layout>
+      <SearchPreference />
+      <EventList
+        eventList={events.value.events}
+        onCardClick={handleCardClick}
+      />
+    </Layout>
   );
 });
