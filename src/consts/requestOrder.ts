@@ -17,7 +17,7 @@ export const KEYWORDS = [
   "C#",
   "C++",
   "C",
-  'AI',
+  "AI",
   "PHP",
   "Go",
   "Rust",
@@ -81,3 +81,21 @@ export const PREFECTURES = [
   "鹿児島県",
   "沖縄県",
 ];
+
+export const generateMonths = () => {
+  const time = new Date();
+  const result = [];
+
+  for (let i = 0; i < 4; i++) {
+    time.setMonth(time.getMonth() + 1);
+    const ym = time
+      .toLocaleDateString("ja-jp", {
+        year: "numeric",
+        month: "2-digit",
+      })
+      .replace("/", "");
+    result.push(ym);
+  }
+
+  return result;
+};
