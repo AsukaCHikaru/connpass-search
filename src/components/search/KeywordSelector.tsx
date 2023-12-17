@@ -4,6 +4,7 @@ import { useSearchQuery } from "~/hooks/useSearchQuery";
 import styles from "./KeywordSelector.module.css";
 
 interface Props {
+  parameter: string;
   keywords: string[];
 }
 
@@ -17,15 +18,17 @@ const toggle = (value: string, list: string[]) => {
   return Array.from(set);
 };
 
-export default component$<Props>(({ keywords }) => {
+export default component$<Props>(({ parameter, keywords }) => {
   const nav = useNavigate();
   const searchQuery = useSearchQuery();
 
   const handleClick = $(async (keyword: string) => {
-    const newQuery = {
-      ...searchQuery.value,
-      keyword: toggle(keyword, searchQuery.value.keyword).join(","),
-    };
+    const newQuery = Object.fromEntries(
+      Object.entries({
+        ...searchQuery.value,
+        [parameter]: toggle(keyword, searchQuery.value[parameter]),
+      }).map(([key, value]) => [key, value.join(",")])
+    );
     const searchParams = new URLSearchParams(newQuery);
     await nav(`/search?${searchParams.toString()}`);
   });
@@ -36,8 +39,8 @@ export default component$<Props>(({ keywords }) => {
         <button
           key={`keyowrd-${keyword}`}
           onClick$={() => handleClick(keyword)}
-          class={styles['keyword-button']}
-          data-actived={searchQuery.value.keyword.includes(keyword)}
+          class={styles["keyword-button"]}
+          data-actived={searchQuery.value[parameter]?.includes(keyword)}
         >
           {keyword}
         </button>

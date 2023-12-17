@@ -13,8 +13,8 @@ import SearchPreference from "~/components/search/SearchPreference";
 import { PortalContext } from "~/components/search/Portal";
 
 export const useEvents = routeLoader$(async (requestEvent) => {
-  const keyword = requestEvent.query.get("keyword") || "";
-  const data = (await fetchEvents({ keyword })) as ConnpassEventResponse;
+  const queries = Object.fromEntries(requestEvent.query.entries())
+  const data = (await fetchEvents(queries)) as ConnpassEventResponse;
   return data;
 });
 

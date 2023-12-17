@@ -40,8 +40,8 @@ export type ConnpassEventRequestQuery = {
   event_id?: number;
   keyword?: string;
   keyword_or?: string;
-  ym?: number;
-  ymd?: number;
+  ym?: string;
+  ymd?: string;
   nickname?: string;
   owner_nickname?: string;
   series_id?: number;

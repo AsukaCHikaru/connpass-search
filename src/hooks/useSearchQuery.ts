@@ -5,9 +5,12 @@ export const useSearchQuery = () => {
   const location = useLocation();
   const searchQuery = useComputed$(() => {
     const { searchParams } = location.url;
-    return {
-      keyword: (searchParams.get("keyword") || "").split(",").filter(Boolean),
-    };
+    return Object.fromEntries(
+      Array.from(searchParams.entries()).map(([key, value]) => [
+        key,
+        value.split(",").filter(Boolean),
+      ])
+    );
   });
 
   return searchQuery;
