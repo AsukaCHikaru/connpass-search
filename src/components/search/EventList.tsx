@@ -8,17 +8,14 @@ interface Props {
   onCardClick: (event: ConnpassEvent) => void;
 }
 
-export default component$<Props>(({eventList, onCardClick}) => {
+export default component$<Props>(({ eventList, onCardClick }) => {
   return (
-    <div class={styles['card-list']}>
-      {" "}
-      {eventList.map((event) => (
-        <EventCard
-          key={event.event_id}
-          event={event}
-          onClick={onCardClick}
-        />
-      ))}
+    <div class={styles["list-wrapper"]}>
+      <div class={styles["card-list"]}>
+        {eventList.map((event) => (
+          <EventCard key={event.event_id} event={event} onClick={onCardClick} />
+        ))}
+      </div>
     </div>
   );
 });

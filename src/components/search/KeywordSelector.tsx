@@ -1,6 +1,7 @@
 import { component$, $ } from "@builder.io/qwik";
 import { useNavigate } from "@builder.io/qwik-city";
 import { useSearchQuery } from "~/hooks/useSearchQuery";
+import styles from "./KeywordSelector.module.css";
 
 interface Props {
   keywords: string[];
@@ -30,23 +31,17 @@ export default component$<Props>(({ keywords }) => {
   });
 
   return (
-    <div>
-      <ul>
-        {keywords.map((keyword) => (
-          <li key={`keyowrd-${keyword}`}>
-            <button
-              onClick$={() => handleClick(keyword)}
-              style={{
-                fontWeight: searchQuery.value.keyword.includes(keyword)
-                  ? 900
-                  : 300,
-              }}
-            >
-              {keyword}
-            </button>
-          </li>
-        ))}
-      </ul>
+    <div class={styles["keyword-container"]}>
+      {keywords.map((keyword) => (
+        <button
+          key={`keyowrd-${keyword}`}
+          onClick$={() => handleClick(keyword)}
+          class={styles['keyword-button']}
+          data-actived={searchQuery.value.keyword.includes(keyword)}
+        >
+          {keyword}
+        </button>
+      ))}
     </div>
   );
 });

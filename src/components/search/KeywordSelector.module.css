@@ -1,0 +1,15 @@
+.keyword-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.keyword-button {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: solid 1px white;
+  &[data-actived] {
+    border-color: grey;
+    background-color: grey;
+  }
+}
