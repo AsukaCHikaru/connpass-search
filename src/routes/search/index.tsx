@@ -23,6 +23,7 @@ export default component$(() => {
   const selectedEvent = useSignal<ConnpassEvent | null>(null);
   const handleModalClose = $(() => {
     selectedEvent.value = null;
+    document.body.style.overflow = 'scroll';
   });
   useContextProvider(PortalContext, {
     onClose: handleModalClose,
@@ -31,6 +32,7 @@ export default component$(() => {
 
   const handleCardClick = $((event: ConnpassEvent) => {
     selectedEvent.value = event;
+    document.body.style.overflow = 'hidden'
   });
 
   return (

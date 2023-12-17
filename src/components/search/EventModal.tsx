@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import type { ConnpassEvent } from "~/types/connpass";
-import styles from "./EventModal.module.css";
+import { ModalBase } from "./ModalBase";
 
 interface Props {
   event: ConnpassEvent;
@@ -9,10 +9,7 @@ interface Props {
 
 export default component$<Props>(({ event, onClose }) => {
   return (
-    <div class={styles.modal}>
-      <button class={styles["close-button"]} onClick$={onClose}>
-        X
-      </button>
+    <ModalBase onClose={onClose}>
       <h2>{event.title}</h2>
       {event.catch && <h6>{event.catch}</h6>}
       <p dangerouslySetInnerHTML={event.description}></p>
@@ -26,6 +23,6 @@ export default component$<Props>(({ event, onClose }) => {
       <a href={event.event_url} target="_blank" rel="noopener noreferrer">
         link
       </a>
-    </div>
+    </ModalBase>
   );
 });
