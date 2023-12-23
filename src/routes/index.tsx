@@ -3,6 +3,7 @@ import {
   component$,
   useContextProvider,
   useSignal,
+  useStyles$,
 } from "@builder.io/qwik";
 import { routeLoader$ } from "@builder.io/qwik-city";
 import { fetchEvents } from "~/services/eventService";
@@ -11,6 +12,7 @@ import EventList from "~/components/EventList";
 import Layout from "~/components/Layout";
 import SearchPreference from "~/components/SearchPreference";
 import { PortalContext } from "~/components/Portal";
+import styles from './styles.css?inline';
 
 export const useEvents = routeLoader$(async (requestEvent) => {
   const queries = Object.fromEntries(requestEvent.query.entries())
@@ -29,6 +31,7 @@ export default component$(() => {
     onClose: handleModalClose,
     event: selectedEvent,
   });
+  useStyles$(styles);
 
   const handleCardClick = $((event: ConnpassEvent) => {
     selectedEvent.value = event;
