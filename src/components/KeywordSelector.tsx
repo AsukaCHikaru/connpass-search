@@ -30,7 +30,7 @@ export default component$<Props>(({ parameter, keywords }) => {
       }).map(([key, value]) => [key, value.join(",")])
     );
     const searchParams = new URLSearchParams(newQuery);
-    await nav(`/search?${searchParams.toString()}`);
+    await nav(`/?${searchParams.toString()}`);
   });
 
   return (
