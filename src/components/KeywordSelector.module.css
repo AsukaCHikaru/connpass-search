@@ -7,9 +7,13 @@
 .keyword-button {
   padding: 0.5rem 1rem;
   background-color: transparent;
-  border: solid 1px white;
+  border: solid 1px;
+  :hover {
+    background-color: var(--red);
+  }
   &[data-actived] {
-    border-color: grey;
-    background-color: grey;
+    color: var(--yellow);
+    border-color: var(--red);
+    background-color: var(--red);
   }
 }

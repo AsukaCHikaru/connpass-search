@@ -11,9 +11,7 @@ export const ModalBase = component$<Props>(({ onClose }) => {
       <div class={styles["modal-base"]}>
         <div class={styles["modal-overlay"]} onClick$={onClose} />
         <div class={styles["modal-content"]}>
-          <button class={styles["modal-close-btn"]} onClick$={onClose}>
-            X
-          </button>
+          <button class={styles["modal-close-btn"]} onClick$={onClose} />
           <Slot />
         </div>
       </div>
