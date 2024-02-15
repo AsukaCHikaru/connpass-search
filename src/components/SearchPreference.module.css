@@ -1,3 +1,16 @@
 .preference-wrapper {
   flex-grow: 1;
 }
+
+.active-preference-container {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.clear-preference-btn {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  outline: none;
+  border: solid 1px var(--yellow);
+}

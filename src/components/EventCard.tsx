@@ -16,7 +16,6 @@ interface Props {
 }
 
 export default component$<Props>(({ event, onClick }) => {
-  console.log(event);
   const time = new Date(event.started_at).toLocaleString("ja-jp", {
     year: "numeric",
     month: "numeric",
