@@ -10,7 +10,7 @@ type ConnpassEvent = {
   hash_tag: string;
   started_at: string;
   ended_at: string;
-  limit: number;
+  limit: number | null;
   event_type: string;
   series: {
     id: number;
