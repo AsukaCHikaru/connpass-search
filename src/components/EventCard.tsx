@@ -35,7 +35,7 @@ export default component$<Props>(({ event, onClick }) => {
       <p>{time}</p>
       <p>{getHeadcountLabel(event.accepted, event.limit)}</p>
       <a href={event.event_url} target="_blank" rel="noopener noreferrer">
-        link
+        connpass link
       </a>
     </div>
   );
