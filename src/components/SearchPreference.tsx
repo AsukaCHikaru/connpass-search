@@ -32,6 +32,11 @@ export default component$(() => {
         </div>
       ) : null}
       <KeywordSelector
+        title="開催月"
+        parameter="ym"
+        keywords={generateMonths()}
+      />
+      <KeywordSelector
         title="キーワード"
         parameter="keyword_or"
         keywords={KEYWORDS}
@@ -40,11 +45,6 @@ export default component$(() => {
         title="エリア"
         parameter="keyword_or"
         keywords={PREFECTURES}
-      />
-      <KeywordSelector
-        title="開催月"
-        parameter="ym"
-        keywords={generateMonths()}
       />
     </div>
   );
