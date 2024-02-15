@@ -6,6 +6,7 @@ import styles from "./KeywordSelector.module.css";
 interface Props {
   parameter: string;
   keywords: string[];
+  title: string;
 }
 
 const toggle = (value: string, list: string[]) => {
@@ -18,7 +19,7 @@ const toggle = (value: string, list: string[]) => {
   return Array.from(set);
 };
 
-export default component$<Props>(({ parameter, keywords }) => {
+export default component$<Props>(({ parameter, keywords, title }) => {
   const nav = useNavigate();
   const searchQuery = useSearchQuery();
 
@@ -34,17 +35,20 @@ export default component$<Props>(({ parameter, keywords }) => {
   });
 
   return (
-    <div class={styles["keyword-container"]}>
-      {keywords.map((keyword) => (
-        <button
-          key={`keyowrd-${keyword}`}
-          onClick$={() => handleClick(keyword)}
-          class={styles["keyword-button"]}
-          data-actived={searchQuery.value[parameter]?.includes(keyword)}
-        >
-          {keyword}
-        </button>
-      ))}
-    </div>
+    <>
+      <h3 class={styles["keyword-header"]}>{title}</h3>
+      <div class={styles["keyword-container"]}>
+        {keywords.map((keyword) => (
+          <button
+            key={`keyowrd-${keyword}`}
+            onClick$={() => handleClick(keyword)}
+            class={styles["keyword-button"]}
+            data-actived={searchQuery.value[parameter]?.includes(keyword)}
+          >
+            {keyword}
+          </button>
+        ))}
+      </div>
+    </>
   );
 });

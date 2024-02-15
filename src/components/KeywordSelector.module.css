@@ -4,6 +4,15 @@
   gap: 4px;
 }
 
+.keyword-header {
+  margin: 1rem 0;
+  font-size: 1rem;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
 .keyword-button {
   padding: 0.5rem 1rem;
   background-color: transparent;
