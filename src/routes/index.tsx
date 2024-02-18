@@ -13,7 +13,7 @@ import Layout from "~/components/Layout";
 import SearchPreference from "~/components/SearchPreference";
 import { PortalContext } from "~/components/Portal";
 import styles from "./styles.css?inline";
-import { LoadingContext } from "~/components/Loading";
+import Loading, { LoadingContext } from "~/components/Loading";
 
 export const useEvents = routeLoader$(async (requestEvent) => {
   const queries = Object.fromEntries(requestEvent.query.entries());
@@ -41,12 +41,9 @@ export default component$(() => {
     document.body.style.overflow = "hidden";
   });
 
-  if (loading.value) {
-    return <div>loading</div>;
-  }
-
   return (
     <Layout>
+      {loading.value ? <Loading /> : null}
       <SearchPreference />
       <EventList
         eventList={events.value.events}
