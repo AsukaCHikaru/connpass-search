@@ -12,10 +12,11 @@ import EventList from "~/components/EventList";
 import Layout from "~/components/Layout";
 import SearchPreference from "~/components/SearchPreference";
 import { PortalContext } from "~/components/Portal";
-import styles from './styles.css?inline';
+import styles from "./styles.css?inline";
+import { LoadingContext } from "~/components/Loading";
 
 export const useEvents = routeLoader$(async (requestEvent) => {
-  const queries = Object.fromEntries(requestEvent.query.entries())
+  const queries = Object.fromEntries(requestEvent.query.entries());
   const data = (await fetchEvents(queries)) as ConnpassEventResponse;
   return data;
 });
@@ -25,18 +26,24 @@ export default component$(() => {
   const selectedEvent = useSignal<ConnpassEvent | null>(null);
   const handleModalClose = $(() => {
     selectedEvent.value = null;
-    document.body.style.overflow = 'scroll';
+    document.body.style.overflow = "scroll";
   });
   useContextProvider(PortalContext, {
     onClose: handleModalClose,
     event: selectedEvent,
   });
   useStyles$(styles);
+  const loading = useSignal<boolean>(false);
+  useContextProvider(LoadingContext, { loading });
 
   const handleCardClick = $((event: ConnpassEvent) => {
     selectedEvent.value = event;
-    document.body.style.overflow = 'hidden'
+    document.body.style.overflow = "hidden";
   });
+
+  if (loading.value) {
+    return <div>loading</div>;
+  }
 
   return (
     <Layout>

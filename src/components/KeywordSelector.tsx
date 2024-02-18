@@ -1,7 +1,8 @@
-import { component$, $ } from "@builder.io/qwik";
+import { component$, $, useContext } from "@builder.io/qwik";
 import { useNavigate } from "@builder.io/qwik-city";
 import { useSearchQuery } from "~/hooks/useSearchQuery";
 import styles from "./KeywordSelector.module.css";
+import { LoadingContext } from "./Loading";
 
 interface Props {
   parameter: string;
@@ -22,6 +23,7 @@ const toggle = (value: string, list: string[]) => {
 export default component$<Props>(({ parameter, keywords, title }) => {
   const nav = useNavigate();
   const searchQuery = useSearchQuery();
+  const { loading } = useContext(LoadingContext);
 
   const handleClick = $(async (keyword: string) => {
     const newQuery = Object.fromEntries(
@@ -31,7 +33,9 @@ export default component$<Props>(({ parameter, keywords, title }) => {
       }).map(([key, value]) => [key, value.join(",")])
     );
     const searchParams = new URLSearchParams(newQuery);
+    loading.value = true;
     await nav(`/?${searchParams.toString()}`);
+    loading.value = false;
   });
 
   return (
